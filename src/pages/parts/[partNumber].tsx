@@ -1,4 +1,5 @@
-import Comment, { IComment } from "@/components/comment";
+import Comment, { IComment } from "@/components/Comment";
+import Head from "@/components/HeadSetter";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
@@ -31,6 +32,7 @@ const comments: IComment[] = [
 export default function Home() {
   return (
     <>
+      <Head title="test" />
       {comments.map((singleComment, i) => (
         <Comment comment={singleComment} key={i + " " + singleComment.id} />
       ))}

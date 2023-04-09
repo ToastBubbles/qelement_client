@@ -1,20 +1,21 @@
 import React from "react";
 
-export interface IComment {
-  id: number;
-  content: string;
+function idLookup(id: number) {
+  return {
+    user: "jim",
+    content: "text body",
+  };
 }
 
-interface iProps {
-  comment: IComment;
-}
-
-function Comment({ comment }: iProps) {
+function Comment({ id = 0 }) {
+  let commentObject = idLookup(id);
   return (
     <div className="comment">
-      <p>Your ID is {comment.id}.</p>
-      <p>Comment: {comment.content}</p>
-      <br />
+      <img className="comment-pic" src="/img/blank_profile.webp" />
+      <div className="comment-content">
+        <div className="comment-username">{commentObject.user}</div>
+        <div className="comment-body">{commentObject.content}</div>
+      </div>
     </div>
   );
 }
