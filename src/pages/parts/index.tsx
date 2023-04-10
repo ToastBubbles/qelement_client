@@ -114,6 +114,7 @@ export default function Home() {
                     placeholder="Search..."
                   />
                 </form>
+
                 <fieldset className="other-colors">
                   <legend>other colors</legend>
                   <AllColorStatus partId={3001} />

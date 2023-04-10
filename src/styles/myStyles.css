@@ -15,6 +15,7 @@ body {
   /* overflow: hidden; */
 }
 * {
+  box-sizing: border-box;
   font-family: "lexend", "Tahoma", sans-serif;
 }
 body::-webkit-scrollbar {
@@ -265,37 +266,26 @@ fieldset > legend {
                 <div class="flag flag-unknown">unkown</div>
               </div> */
 .table-id {
-  display: inline-block;
+  display: flex;
+  padding-right: 0.2em;
+  justify-content: end;
   width: 1.75em;
 }
 .flag {
   color: #fff;
-  text-shadow: #5a5a5ab4 1px 0px 0, #5a5a5ab4 -1px 0px 0, #5a5a5ab4 0px -1px 0,
-    #5a5a5ab4 0px 1px 0;
-
+  /* text-shadow: #5a5a5ab4 1px 0px 0, #5a5a5ab4 -1px 0px 0, #5a5a5ab4 0px -1px 0,
+    #5a5a5ab4 0px 1px 0; */
+  text-shadow: #2c2c2c 1px 1px 0;
   padding: 0.15em 0.25em 0.15em 0.25em;
   display: block;
   border-radius: 0.2em;
   border: solid 0.5px rgba(41, 41, 41, 0.192);
 }
-
 .flag-status {
-  /* flex-grow: 1; */
   margin-left: auto;
-}
-.flag-skyblue {
-  background-color: rgb(191, 228, 255);
 }
 .flag-unknown {
   background-color: rgb(255, 255, 173);
-}
-
-.flag-red {
-  background-color: rgb(255, 165, 165);
-}
-
-.flag-deeppurple {
-  background-color: rgb(181, 107, 255);
 }
 .flag-released {
   background-color: rgb(133, 133, 255);
@@ -537,4 +527,49 @@ fieldset > legend {
   width: 100%;
   border: solid 1px #ccc;
   aspect-ratio: 16 / 4;
+}
+a:link,
+a:visited {
+  color: #fff;
+}
+/* <div>
+{colors.map((singleColor, i) => (
+  <div className="color-row-new">
+    <div className="table-id-new">{singleColor.Lid}</div>
+    <Link
+      href={"/colors/" + singleColor.Lid}
+      className="flag-new"
+      style={{ backgroundColor: "#" + singleColor.color }}
+    >
+      {singleColor.BLName.length == 0
+        ? singleColor.LName
+        : singleColor.BLName}
+    </Link>
+    <div
+      className="tag-color-new"
+      style={{ backgroundColor: "#" + singleColor.color }}
+    ></div>
+    <div className="flag flag-status flag-unknown">
+      {statusLookup(partId, singleColor.Lid)}
+    </div>
+  </div> */
+.hexbar {
+  display: inline-block;
+  color: white;
+  text-transform: capitalize;
+  font-weight: bold;
+  padding: 0.5em;
+  text-shadow: #2c2c2c 1px 1px 0;
+  border-radius: 0.25em;
+  font-size: 1.5em;
+  /* height: 2em; */
+}
+.colorTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 2em;
+}
+.colorName {
+  font-size: 3em;
 }
