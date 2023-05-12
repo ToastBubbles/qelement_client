@@ -107,19 +107,19 @@ body::-webkit-scrollbar {
   border: solid 1px var(--lt-grey);
 }
 a:link {
-  color: rgb(69, 194, 194);
+  /* color: rgb(69, 194, 194); */
   text-decoration: none;
 }
 a:visited {
-  color: rgb(69, 194, 194);
+  /* color: rgb(69, 194, 194); */
   text-decoration: none;
 }
 a:hover {
-  color: rgb(69, 194, 194);
+  /* color: rgb(69, 194, 194); */
   text-decoration: none;
 }
 a:active {
-  color: rgb(69, 194, 194);
+  /* color: rgb(69, 194, 194); */
   text-decoration: none;
 }
 .breadcrumb {
@@ -530,7 +530,9 @@ fieldset > legend {
 }
 a:link,
 a:visited {
-  color: #fff;
+  /* color: #fff; */
+  text-decoration: none;
+  color: inherit;
 }
 /* <div>
 {colors.map((singleColor, i) => (
@@ -562,6 +564,8 @@ a:visited {
   text-shadow: #2c2c2c 1px 1px 0;
   border-radius: 0.25em;
   font-size: 1.5em;
+  border: solid 1px #eee;
+  /* box-shadow: 5px 5px 5px -6px rgba(0, 0, 0, 0.75); */
   /* height: 2em; */
 }
 .colorTop {
@@ -572,4 +576,187 @@ a:visited {
 }
 .colorName {
   font-size: 3em;
+}
+.simBanner {
+  background-color: #ffe77b;
+  border: solid 1px #7e6b19;
+  display: flex;
+  justify-content: end;
+  align-items: baseline;
+  padding: 0.1em 0.2em;
+  margin-bottom: 1em;
+}
+.simBannerText {
+  color: #7e6b19;
+  flex-grow: 1;
+}
+.flag-spacer {
+  margin-right: 0.2em;
+}
+.colorRow {
+  width: 100%;
+  padding: 0.1em;
+}
+.color-table > tr:nth-child(even) {
+  border: none;
+  background-color: #bdd4df70;
+}
+.color-table {
+  table-layout: fixed;
+  width: 100%;
+  /* border: 1px solid; */
+  border-collapse: collapse;
+}
+/* .color-table > tr > td {
+  border: solid 1px #000000;
+
+} */
+
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.md-grey-text {
+  color: #525252;
+}
+.square {
+  aspect-ratio: 1 / 1;
+}
+
+.h100 {
+  height: 100%;
+}
+.swatch-header {
+  min-width: 1.5em;
+}
+.color-table-container {
+  margin: 0 0;
+}
+@media only screen and (min-width: 1600px) {
+  .color-table-container {
+    margin: 0 15%;
+  }
+}
+td {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.table-notes {
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  font-size: 0.8em;
+}
+
+.border-top {
+  border-top: solid 1px black;
+}
+.border-bottom {
+  border-bottom: solid 1px black;
+}
+.border-right {
+  border-right: solid 1px rgba(0, 0, 0, 0.26);
+}
+.border-right-soft {
+  border-right: dashed 1px #2b2b2b63;
+}
+.border-all {
+  border: solid 1px rgba(0, 0, 0, 0.801);
+}
+.text-center {
+  text-align: center;
+}
+.flex-text-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell-shade-red {
+  background-color: #ff000009;
+}
+.cell-shade-yellow {
+  background-color: #ffee0009;
+}
+.cell-shade-blue {
+  background-color: #00b7ff09;
+}
+.pr-sm {
+  padding-right: 0.1em;
+}
+.pl-sm {
+  padding-left: 0.3em;
+}
+.transparent {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent 0%,
+    #fff 1px,
+    transparent 0% 5px,
+    #fff 1px
+  );
+  background-repeat: repeat;
+}
+.glitter {
+  background-image: radial-gradient(#ffffff 20%, transparent 20%),
+    radial-gradient(#fafafa 20%, transparent 20%);
+
+  background-position: 0 0, 30px 30px;
+  background-size: 5px 5px;
+}
+
+.satin {
+  /* width: 24px; */
+  /* aspect-ratio: 1; */
+  background-image: linear-gradient(transparent 50%, #00000050);
+  position: relative;
+  z-index: 0;
+}
+
+.satin:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: inherit; /* use the same gradient */
+  transform: rotate(-90deg); /* rotate it */
+  clip-path: polygon(
+    100% 0,
+    100% 100%,
+    0 100%
+  ); /* show only half of the element */
+}
+.satin:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: linear-gradient(#00000050, transparent 50%);
+  transform: rotate(90deg); /* rotate it */
+  clip-path: polygon(
+    100% 0,
+    100% 100%,
+    0 100%
+  ); /* show only half of the element */
+}
+
+.pearl {
+  background-image: url(/img/swirl.png);
+}
+
+.chrome {
+  background-image: linear-gradient(360deg, transparent 50%, #fff);
+}
+
+.speckle {
+  background-image: radial-gradient(#000, transparent 20%),
+    radial-gradient(#000, transparent 20%);
+
+  background-position: 0 0, 30px 30px;
+  background-size: 8px 8px;
+}
+.temp-footer {
+  margin-bottom: 10em;
 }
