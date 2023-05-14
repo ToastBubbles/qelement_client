@@ -760,3 +760,132 @@ td {
 .temp-footer {
   margin-bottom: 10em;
 }
+.color-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.color-container > section {
+  width: 50%;
+  padding: 1em;
+}
+.color-details-container {
+  border: solid 1px black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 1em; */
+}
+
+.color-details-banner {
+  width: 100%;
+  text-align: center;
+  background-color: rgb(50, 54, 61);
+  color: var(--lt-grey);
+}
+.color-detail-header {
+  text-align: center;
+  width: 90%;
+  border-bottom: solid 1px #aaa;
+  border-top: solid 1px #aaa;
+}
+.color-subdetails-id {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.color-subdetails-id > div {
+  /* min-width: 25%; */
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 1em 0;
+  /* border: solid 1px #eee; */
+}
+.color-id {
+  position: relative;
+  font-size: 2em;
+  /* border-bottom: solid 1px #eee; */
+}
+.color-id:after {
+  content: "";
+  background: #eee;
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  height: 1px;
+  width: 50%;
+}
+.w-100 {
+  width: 100%;
+}
+.d-flex {
+  display: flex;
+}
+.col-det-name {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: 1.2em;
+  width: 17%;
+  text-align: right;
+  /* margin-right: 0.25em; */
+  padding-right: 0.25em;
+  /* margin: 0.25em 0.5em 0.25em 0; */
+}
+
+.align-center {
+  align-items: center;
+}
+.col-det-colname {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: 1.2em;
+  width: 83%;
+  padding-left: 0.25em;
+  border-left: solid 1px #eee;
+}
+.col-det-note {
+  width: 90%;
+  padding: 1em 0;
+}
+.edit-id-input {
+  height: 2em;
+  width: 4em;
+  font-size: 1.3em;
+  text-align: center;
+  margin: auto;
+}
+.edit-note {
+  width: 90%;
+  margin-bottom: 1em;
+  height: 10em;
+  resize: none;
+}
+.edit-save {
+  margin-top: 1em;
+}
+.edit-hex {
+  display: inline-block;
+  color: white;
+  text-transform: capitalize;
+  font-weight: bold;
+  text-shadow: #2c2c2c 1px 1px 0;
+  font-size: 1.5em;
+  width: 4.5em;
+  background-color: #ffffff54;
+  border-radius: 0.2em;
+  border: solid 1px;
+}
+.edit-similarity {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  /* align-items: start; */
+  margin-bottom: 1em;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
