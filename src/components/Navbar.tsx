@@ -1,13 +1,14 @@
+import Link from "next/link";
 import React from "react";
 
 function Navbar() {
   return (
     <nav className="navbar">
       <div className="text-logo">
-        <a href="#">
+        <Link href={"/colors"}>
           <span className="lt-red">q</span>
           <span>element</span>
-        </a>
+        </Link>
       </div>
       <div className="mail-svg">
         <div className="mail-badge">12</div>
