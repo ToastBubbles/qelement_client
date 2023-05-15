@@ -72,7 +72,8 @@ body::-webkit-scrollbar {
 .profile-img {
   display: block;
   aspect-ratio: 1 / 1;
-  height: 70%;
+  /* height: 70%; */
+  width: 3em;
   margin: 0 1em 0 0.5em;
   border-radius: 50%;
 }
@@ -151,16 +152,107 @@ a:active {
   /* border-radius: 0.5em; */
   height: 5em;
 }
+.Not-Rated {
+  border-bottom: solid 1px rgb(163, 163, 163);
+  background: rgb(163, 163, 163);
+  background: radial-gradient(
+    circle,
+    rgb(255, 255, 255) 0%,
+    rgb(163, 163, 163)
+  );
+}
+.Not-Rated-bottom {
+  color: rgb(163, 163, 163);
+  border: solid 1px rgb(163, 163, 163);
+}
+.Common {
+  border-bottom: solid 1px rgb(167, 195, 228);
+  background: rgb(167, 195, 228);
+  background: radial-gradient(
+    circle,
+    rgb(255, 255, 255) 0%,
+    rgb(167, 195, 228)
+  );
+}
+.Common-bottom {
+  color: rgb(167, 195, 228);
+  border: solid 1px rgb(167, 195, 228);
+}
+.Uncommon {
+  border-bottom: solid 1px rgb(135, 224, 180);
+  background: rgb(135, 224, 180);
+  background: radial-gradient(
+    circle,
+    rgb(255, 255, 255) 0%,
+    rgb(135, 224, 180)
+  );
+}
+.Uncommon-bottom {
+  color: rgb(135, 224, 180);
+  border: solid 1px rgb(135, 224, 180);
+}
+.Rare {
+  border-bottom: solid 1px rgb(233, 173, 94);
+  background: rgb(233, 173, 94);
+  background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgb(233, 173, 94));
+}
+.Rare-bottom {
+  color: rgb(233, 173, 94);
+  border: solid 1px rgb(233, 173, 94);
+}
+.Exceptional {
+  border-bottom: solid 1px rgb(189, 124, 209);
+  background: rgb(189, 124, 209);
+  background: radial-gradient(
+    circle,
+    rgb(255, 255, 255) 0%,
+    rgb(189, 124, 209)
+  );
+}
+.Exceptional-bottom {
+  color: rgb(189, 124, 209);
+  border: solid 1px rgb(189, 124, 209);
+}
 
+.Legendary {
+  border-bottom: solid 1px rgb(233, 202, 101);
+  background: rgb(233, 202, 101);
+  background: radial-gradient(
+    circle,
+    rgb(255, 255, 255) 0%,
+    rgb(233, 202, 101)
+  );
+}
+.Legendary-bottom {
+  color: rgb(233, 202, 101);
+  border: solid 1px rgb(233, 202, 101);
+}
+.Elusive {
+  border-bottom: solid 1px rgb(223, 87, 189);
+  background: rgb(223, 87, 189);
+  background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgb(223, 87, 189));
+}
+.Elusive-bottom {
+  color: rgb(223, 87, 189);
+  border: solid 1px rgb(223, 87, 189);
+}
+.Unobtainable {
+  border-bottom: solid 1px #ef7171;
+  background: rgb(255, 159, 159);
+  background: radial-gradient(circle, rgb(255, 216, 216) 0%, var(--lt-red));
+}
+.Unobtainable-bottom {
+  color: var(--lt-red);
+  border: solid 1px var(--lt-red);
+}
 .rating-score {
   font-size: 2.8rem;
   height: 75%;
   text-align: center;
-  border-bottom: solid 1px #ef7171;
+
   color: white;
   background-position: 0px 0px;
-  background: rgb(255, 159, 159);
-  background: radial-gradient(circle, rgb(255, 216, 216) 0%, var(--lt-red));
+
   text-shadow: #2c2c2c 1px 1px 0;
   border-radius: 0.25em 0.25em 0 0;
   /* background: #ffffff;
@@ -168,7 +260,10 @@ a:active {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; */
 }
-
+.ratingInput {
+  width: 5em;
+  text-align: center;
+}
 .rating-text {
   font-weight: bold;
   /* color: linea; */
@@ -177,10 +272,10 @@ a:active {
     background: linear-gradient(to bottom, #ffffff 0%, #ffb5b5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; */
-  color: var(--lt-red);
+
   background-color: azure;
   border-radius: 0 0 0.5em 0.5em;
-  border: solid 1px var(--lt-red);
+
   border-top: none;
 }
 .rating-container {
@@ -194,7 +289,9 @@ a:active {
   margin-top: 2em;
 }
 .my-rating-number {
-  margin-top: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  font-size: 1.5em;
   color: #aaa;
 }
 
@@ -532,7 +629,7 @@ a:link,
 a:visited {
   /* color: #fff; */
   text-decoration: none;
-  color: inherit;
+  /* color: inherit; */
 }
 /* <div>
 {colors.map((singleColor, i) => (

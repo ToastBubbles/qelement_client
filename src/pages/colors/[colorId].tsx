@@ -13,12 +13,12 @@ import axios from "axios";
 import { color, ISimilarColorDTO, similarColor } from "@/interfaces/general";
 import SimilarColorBanner from "@/components/SimilarColorBanner";
 
-
-
-export default function Home() {
+export default function Part() {
   // let color = colors.find((x) => x.Lid == ColorId());
   const router = useRouter();
   const { colorId } = router.query;
+  console.log(colorId);
+
 
   const [similarColorToAdd, setSimilarColorToAdd] = useState<number>(0);
 
