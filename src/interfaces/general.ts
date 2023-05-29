@@ -89,3 +89,18 @@ export interface user {
   password: string;
   role: string;
 }
+
+export interface ILoginDTO {
+  username: string;
+  password: string;
+}
+export interface iPartDTO {
+  name: string;
+  number: string;
+  CatId: number;
+}
+
+export interface category {
+  id: number;
+  name: string;
+}

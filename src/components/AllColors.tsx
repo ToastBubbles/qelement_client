@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import { color } from "../interfaces/general";
-import { similarColor } from "@/pages/colors/[colorId]";
+// import { similarColor } from "@/pages/colors/[colorId]";
 
 export interface ITableOptions {
   hideQID: boolean;
@@ -136,24 +136,30 @@ function generateTable(
                 </td>
 
                 <td className="pr-sm text-right md-grey-text border-top border-bottom border-right-soft cell-shade-yellow">
-                  {color.bl_id == 0 ? "" : color.bl_id}
+                  {color.bl_id <= 0 ? "" : color.bl_id}
                 </td>
                 <td className="pl-sm border-top border-bottom border-right cell-shade-yellow">
-                  <Link href={"/colors/" + color.id}>{color.bl_name}</Link>
+                  <Link className="text-black" href={"/colors/" + color.id}>
+                    {color.bl_name}
+                  </Link>
                 </td>
                 <td className="pr-sm text-right md-grey-text border-top border-bottom border-right-soft cell-shade-red">
-                  {color.tlg_id == 0 ? "" : color.tlg_id}
+                  {color.tlg_id <= 0 ? "" : color.tlg_id}
                 </td>
                 <td className="pl-sm border-top border-bottom border-right cell-shade-red">
-                  <Link href={"/colors/" + color.id}>{color.tlg_name}</Link>
+                  <Link className="text-black" href={"/colors/" + color.id}>
+                    {color.tlg_name}
+                  </Link>
                 </td>
                 {!tableOptions.hideBrickOwl && (
                   <>
                     <td className="pr-sm text-right md-grey-text border-top border-bottom border-right-soft cell-shade-blue">
-                      {color.bl_id == 0 ? "" : color.bl_id}
+                      {color.bl_id <= 0 ? "" : color.bl_id}
                     </td>
                     <td className="pl-sm border-top border-bottom border-right cell-shade-blue">
-                      <Link href={"/colors/" + color.id}>{color.bo_name}</Link>
+                      <Link className="text-black" href={"/colors/" + color.id}>
+                        {color.bo_name}
+                      </Link>
                     </td>
                   </>
                 )}

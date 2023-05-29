@@ -19,7 +19,6 @@ export default function Part() {
   const { colorId } = router.query;
   console.log(colorId);
 
-
   const [similarColorToAdd, setSimilarColorToAdd] = useState<number>(0);
 
   // const queryClient = new QueryClient({
@@ -57,14 +56,14 @@ export default function Part() {
   // console.log(sdata);
   // console.log(simData?.data);
 
-  const similarColorMutation = useMutation({
-    mutationFn: ({ color_one, color_two }: ISimilarColorDTO) =>
-      axios.post<color>(`http://localhost:3000/similarColor`, {
-        color_one,
-        color_two,
-      }),
-    onSuccess: () => {},
-  });
+  // const similarColorMutation = useMutation({
+  //   mutationFn: ({ color_one, color_two }: ISimilarColorDTO) =>
+  //     axios.post<color>(`http://localhost:3000/similarColor`, {
+  //       color_one,
+  //       color_two,
+  //     }),
+  //   onSuccess: () => {},
+  // });
 
   if (colError || simError) {
     router.push("/404");

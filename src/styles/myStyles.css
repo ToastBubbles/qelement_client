@@ -1,9 +1,19 @@
 :root {
   --lt-red: #ff7272;
   --lt-grey: #ccc;
+  --dk-grey: rgb(50, 54, 61);
   /* --main-font-family: "Nunito Sans", sans-serif; */
 }
-
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+#__next {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 @font-face {
   font-family: lexend;
   src: url(/Lexend_Deca/LexendDeca-VariableFont_wght.ttf);
@@ -36,7 +46,7 @@ body::-webkit-scrollbar {
 .navbar {
   display: flex;
   align-items: center;
-  background-color: rgb(50, 54, 61);
+  background-color: var(--dk-grey);
   width: 100%;
   height: 4rem;
 }
@@ -307,7 +317,9 @@ a:active {
   display: inline-block;
   color: #525252;
 }
-
+.text-black {
+  color: #2c2c2c;
+}
 .status {
   border: solid 1px var(--lt-grey);
   width: 25%;
@@ -985,4 +997,59 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+.loginRegForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 1px rgba(145, 145, 145, 0.336);
+  border-radius: 1em;
+  min-width: 40em;
+  max-width: 50em;
+  padding: 3em 3em 1em 3em;
+}
+.loginRegForm > input {
+  width: 100%;
+  margin-bottom: 2em;
+  padding: 0.25em;
+}
+.loginRegForm > button {
+  padding: 0.25em 0.75em;
+  margin-bottom: 2em;
+  align-self: flex-end;
+}
+.loginRegForm > a {
+  font-size: 0.8em;
+}
+.logincontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dk-grey);
+  color: var(--lt-grey);
+}
+.footer-bottom,
+.footer-top {
+  width: 100%;
+}
+.maincontainer {
+  flex-grow: 1;
+}
+.pass-req {
+  list-style-type: none;
+  width: 100%;
+  padding: 0;
+  /* margin: 0; */
+}
+#password-reg,
+#repassword-reg {
+  margin: 0;
+}
+.loginRegForm > p {
+  align-self: flex-start;
 }
