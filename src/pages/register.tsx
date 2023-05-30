@@ -7,6 +7,7 @@ import { IUserDTO } from "@/interfaces/general";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 import Footer from "@/components/Foorter";
+import { useRouter } from "next/router";
 interface passwordValidation {
   isLongEnough: boolean;
   containsNumber: boolean;
@@ -14,6 +15,7 @@ interface passwordValidation {
 }
 
 export default function Register() {
+  const router = useRouter();
   const [newUser, setNewUser] = useState<IUserDTO>({
     name: "",
     email: "",
@@ -120,6 +122,7 @@ export default function Register() {
                     password: newUser.password,
                     role: newUser.role,
                   });
+                  router.push("/login");
                 }
                 // } else {
                 //   alert("Username already exists!");
@@ -136,19 +139,3 @@ export default function Register() {
     </>
   );
 }
-
-// async function checkUsername(username: string): Promise<boolean> {
-//   return new Promise((resolve, reject) => {
-//     const {
-//       data: uData,
-//       isLoading: uIsLoading,
-//       error: uError,
-//     } = useQuery({
-//       queryKey: "username",
-//       queryFn: () =>
-//         axios.get<boolean>(`http://localhost:3000/users/${username}`),
-//       retry: false,
-//     });
-//     if (!uIsLoading && uData) resolve(uData?.data);
-//   });
-// }

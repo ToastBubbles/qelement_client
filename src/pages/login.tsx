@@ -7,13 +7,29 @@ import axios from "axios";
 import { ILoginDTO } from "@/interfaces/general";
 import Cookies from "js-cookie";
 import Footer from "@/components/Foorter";
+import { login } from "@/auth/auth";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Login() {
   const [loginDTO, setLoginDTO] = useState<ILoginDTO>({
     username: "",
     password: "",
   });
+  const [loginError, setLoginError] = useState<boolean>(false);
+  const router = useRouter();
 
+  const attemptLogin = (creds: ILoginDTO) => {
+    login(creds).then((res) => {
+      console.log(res);
+
+      if (res) {
+        router.push("/profile");
+      } else {
+        setLoginError(true);
+      }
+    });
+  };
   return (
     <>
       <Navbar />
@@ -40,23 +56,23 @@ export default function Login() {
                   ...{ password: e.target.value },
                 }))
               }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  attemptLogin(loginDTO);
+                }
+              }}
             />
+
             <button
               onClick={() => {
-                axios
-                  .post<{ access_token: string }>(
-                    `http://localhost:3000/auth/login`,
-                    loginDTO
-                  )
-                  .then((resp) => {
-                    const { access_token } = resp.data;
-                    Cookies.set("userJWT", access_token);
-                  });
+                attemptLogin(loginDTO);
               }}
             >
               Login
             </button>
+            {loginError && <div>incorrect login</div>}
             <a href="#">forgot password?</a>
+            <Link href="/register">Register for an account</Link>
           </div>
         </div>
       </div>
