@@ -104,3 +104,34 @@ export interface category {
   id: number;
   name: string;
 }
+
+export interface IMessageDTO {
+  recipientID: number;
+  senderID: number;
+  subject: string;
+  body: string;
+}
+export interface message {
+  id: number;
+  subject: string;
+  content: string;
+  recipientId: number;
+  senderId: number;
+  createdAt: string;
+  recipientUsername: string;
+}
+export interface IExtendedMessageDTO {
+  id: number;
+  recipientId: number;
+  senderId: number;
+  recipientName: string;
+  senderName: string;
+  subject: string;
+  body: string;
+  read: boolean;
+  createdAt: string;
+}
+export interface IMailbox {
+  inbox: IExtendedMessageDTO[];
+  outbox: IExtendedMessageDTO[];
+}

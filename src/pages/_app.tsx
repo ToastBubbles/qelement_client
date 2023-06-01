@@ -49,7 +49,6 @@ export default function App({ Component, pageProps }: AppProps) {
     console.log(jwt);
   }, [jwt == null]);
 
-  // /{ username: "tester321", id: 2, iat: 1685464768, exp: 1685468368 }
   return (
     <jwtContext.Provider value={jwt}>
       <QueryClientProvider client={queryClient}>

@@ -13,7 +13,7 @@ export default function Profile() {
       <Navbar />
       <jwtContext.Consumer>
         {(jwt) => {
-          if (jwt != null) return <h1>Welcome {jwt?.username}</h1>;
+          if (jwt != null) return <h1>Welcome {jwt?.username as string}</h1>;
         }}
       </jwtContext.Consumer>
     </>

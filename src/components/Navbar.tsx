@@ -1,10 +1,16 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { jwtContext } from "@/jwtContext";
 import LogoutBtn from "./LogoutBtn";
 import LoginBtn from "./LoginBtn";
+import { logout } from "@/auth/auth";
 
 function Navbar() {
+  // let toggleDropdown = false;
+  const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
+  const [messageCount, setMessageCount] = useState<number>(0);
+
+
   return (
     <nav className="navbar">
       <div className="text-logo">
@@ -20,7 +26,9 @@ function Navbar() {
               <>
                 <Link className="mail-svg" href={"/profile/messages"}>
                   <div>
-                    <div className="mail-badge">12</div>
+                    {messageCount > 0 && (
+                      <div className="mail-badge">{messageCount}</div>
+                    )}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="32"
@@ -33,10 +41,37 @@ function Navbar() {
                     </svg>
                   </div>
                 </Link>
-                <Link href={"/profile"}>
-                  <img className="profile-img" src="/img/blank_profile.webp" />
-                </Link>
-                <LogoutBtn />
+                <button
+                  className="navbarProfileImg"
+                  onClick={(e) => {
+                    setToggleDropdown(!toggleDropdown);
+                    console.log("clicked");
+                  }}
+                >
+                  <img
+                    className="profile-img clickable"
+                    src="/img/blank_profile.webp"
+                  />
+                </button>
+                {/* <LogoutBtn /> */}
+                <div
+                  className={
+                    "nav-pop-down clickable" + (toggleDropdown ? "" : " hidden")
+                  }
+                >
+                  <Link href={"/profile"}>My Profile</Link>
+                  <Link href={"/profile"}>My Wanted List</Link>
+                  <Link href={"/profile"}>My Inventory</Link>
+                  <Link href={"/profile"}>Settings</Link>
+                  <div
+                    onClick={(e) => {
+                      logout();
+                      // redirect("/colors");
+                    }}
+                  >
+                    Logout
+                  </div>
+                </div>
               </>
             );
           else return <LoginBtn />;
