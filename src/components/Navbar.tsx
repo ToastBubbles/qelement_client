@@ -1,15 +1,31 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { jwtContext } from "@/jwtContext";
 import LogoutBtn from "./LogoutBtn";
 import LoginBtn from "./LoginBtn";
 import { logout } from "@/auth/auth";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 function Navbar() {
   // let toggleDropdown = false;
   const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
   const [messageCount, setMessageCount] = useState<number>(0);
+  const [userId, setUserId] = useState<number>(-1);
 
+  const {
+    data: msgData,
+    isLoading: msgIsLoading,
+    error: msgError,
+  } = useQuery({
+    queryKey: "individualMessage",
+    queryFn: () =>
+      axios.get<number>(
+        `http://localhost:3000/message/getUnreadCountById/${userId}`
+      ),
+    retry: false,
+    enabled: userId != -1,
+  });
 
   return (
     <nav className="navbar">
@@ -21,7 +37,10 @@ function Navbar() {
       </div>
       <jwtContext.Consumer>
         {(jwt) => {
-          if (jwt != null)
+          if (jwt != null) {
+            setUserId(jwt?.id as number);
+            if (msgData) setMessageCount(msgData.data);
+
             return (
               <>
                 <Link className="mail-svg" href={"/profile/messages"}>
@@ -74,7 +93,7 @@ function Navbar() {
                 </div>
               </>
             );
-          else return <LoginBtn />;
+          } else return <LoginBtn />;
         }}
       </jwtContext.Consumer>
     </nav>

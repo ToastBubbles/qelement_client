@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 import { color, ISimilarColorDTO, similarColor } from "@/interfaces/general";
 import SimilarColorBanner from "@/components/SimilarColorBanner";
+import Link from "next/link";
 
 export default function Part() {
   // let color = colors.find((x) => x.Lid == ColorId());
@@ -191,6 +192,7 @@ export default function Part() {
               {color?.note ? color.note : "No additional notes"}
             </div>
           </div>
+          <Link href={`/edit/colors/${color?.id}`}>Edit this color</Link>
         </section>
       </div>
     </>

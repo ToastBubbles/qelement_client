@@ -31,7 +31,10 @@ function Message({ msg, sent }: IMessageProps) {
   sent ? (displayname = msg.recipientName) : (displayname = msg.senderName);
   return (
     <div className="msg">
-      <Link className="fg-1" href={`/profile/messages/${msg.id}`}>
+      <Link
+        className={"fg-1" + (!msg.read ? " msg-unread" : "")}
+        href={`/profile/messages/${msg.id}`}
+      >
         {msg.subject}
       </Link>
       <div className="clickable">

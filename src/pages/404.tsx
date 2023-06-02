@@ -9,7 +9,11 @@ import axios from "axios";
 export default function Error404() {
   return (
     <>
-      <p>404</p>
+      <Navbar />
+      <div className="page-wrapper">
+        <h1>404 Error</h1>
+        <h3>oops, even we couldn't find these bricks!</h3>
+      </div>
     </>
   );
 }

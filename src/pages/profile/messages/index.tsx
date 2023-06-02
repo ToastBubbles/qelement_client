@@ -20,8 +20,8 @@ import Message from "@/components/Message";
 export default function Messages() {
   const [activeTab, setActiveTab] = useState<number>(0);
   const [newMessage, setNewMessage] = useState<IMessageDTO>({
-    recipientID: -1,
-    senderID: -1,
+    recipientId: -1,
+    senderId: -1,
     subject: "",
     body: "",
   });
@@ -41,7 +41,7 @@ export default function Messages() {
       .then((res) => {
         setNewMessage((newMessage) => ({
           ...newMessage,
-          ...{ senderID: res.data.id },
+          ...{ senderId: res.data.id },
         }));
       });
   }
@@ -78,7 +78,7 @@ export default function Messages() {
                 console.log(res.data);
                 setNewMessage((newMessage) => ({
                   ...newMessage,
-                  ...{ recipientID: res.data?.id },
+                  ...{ recipientId: res.data?.id },
                 }));
                 setIsBadRecipient(false);
               }
@@ -106,7 +106,7 @@ export default function Messages() {
         console.log("getting messages");
         axios
           .get<IMailbox>(
-            `http://localhost:3000/message/getAllById/${newMessage.senderID}`
+            `http://localhost:3000/message/getAllById/${newMessage.senderId}`
           )
           .then((res) => {
             console.log("data:", res.data);
@@ -127,8 +127,8 @@ export default function Messages() {
   }, [recipientIDGetter]);
 
   useEffect(() => {
-    if (newMessage.senderID != -1) setGetMyMail(true);
-  }, [newMessage.senderID]);
+    if (newMessage.senderId != -1) setGetMyMail(true);
+  }, [newMessage.senderId]);
 
   const messageMutation = useMutation({
     mutationFn: (message: IMessageDTO) =>
@@ -142,8 +142,8 @@ export default function Messages() {
     if (
       newMessage.body.length > 0 &&
       newMessage.subject.length > 0 &&
-      newMessage.recipientID != -1 &&
-      newMessage.senderID != -1 &&
+      newMessage.recipientId != -1 &&
+      newMessage.senderId != -1 &&
       !isBadRecipient
     ) {
       console.log("sent");
@@ -161,7 +161,7 @@ export default function Messages() {
       <jwtContext.Consumer>
         {(jwt) => {
           if (jwt != null) {
-            newMessage.senderID == -1 && getMyId(jwt?.username);
+            newMessage.senderId == -1 && getMyId(jwt?.username);
           }
           return (
             <div className="page-wrapper">
@@ -197,14 +197,20 @@ export default function Messages() {
               </div>
               <div className="message-container">
                 {activeTab == 0 &&
-                  myMessages != undefined &&
-                  myMessages.map((msg: IExtendedMessageDTO) => (
-                    <Message msg={msg} sent={false} />
+                  (myMessages?.length != 0 ? (
+                    myMessages?.map((msg: IExtendedMessageDTO) => (
+                      <Message msg={msg} sent={false} />
+                    ))
+                  ) : (
+                    <p>no messages</p>
                   ))}
                 {activeTab == 1 &&
-                  mySentMessages != undefined &&
-                  mySentMessages.map((msg: IExtendedMessageDTO) => (
-                    <Message msg={msg} sent />
+                  (mySentMessages?.length != 0 ? (
+                    mySentMessages?.map((msg: IExtendedMessageDTO) => (
+                      <Message msg={msg} sent />
+                    ))
+                  ) : (
+                    <p>no messages</p>
                   ))}
                 {activeTab == 2 && (
                   <div className="msg-send-new">

@@ -106,8 +106,8 @@ export interface category {
 }
 
 export interface IMessageDTO {
-  recipientID: number;
-  senderID: number;
+  recipientId: number;
+  senderId: number;
   subject: string;
   body: string;
 }
