@@ -1143,3 +1143,16 @@ input::-webkit-inner-spin-button {
 .msg-unread {
   font-weight: bold;
 }
+.login-btn {
+  margin-right: 1em;
+  padding: 0.25em 0.75em;
+  background: none;
+  border: solid 2px var(--lt-grey);
+  color: var(--lt-grey);
+  border-radius: 0.5em;
+  transition: all 0.5s;
+}
+.login-btn:hover {
+  color: var(--lt-red);
+  border-color: var(--lt-red);
+}

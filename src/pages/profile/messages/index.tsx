@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import RatingCard from "@/components/RatingCard";
 import Comment from "@/components/Comment";
@@ -16,6 +16,7 @@ import axios from "axios";
 import { jwtContext } from "@/jwtContext";
 import { IQelementError } from "@/interfaces/error";
 import Message from "@/components/Message";
+import { AppContext } from "@/context/context";
 
 export default function Messages() {
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -31,28 +32,34 @@ export default function Messages() {
   const [isBadRecipient, setIsBadRecipient] = useState<boolean>(false);
   const [myMessages, setMyMessages] = useState<IExtendedMessageDTO[]>();
   const [mySentMessages, setMySentMessages] = useState<IExtendedMessageDTO[]>();
+  const {
+    state: {
+      jwt: { token, payload },
+    },
+    dispatch,
+  } = useContext(AppContext);
   // const { data, isLoading, error, isFetched } = useQuery("todos", () =>
   //   axios.get<user>(`http://localhost:3000/user/${name.trim()}`)
   // );
 
-  function getMyId(username: string) {
-    axios
-      .get<user>(`http://localhost:3000/user/${username.trim()}`)
-      .then((res) => {
-        setNewMessage((newMessage) => ({
-          ...newMessage,
-          ...{ senderId: res.data.id },
-        }));
-      });
-  }
-  function getUsername(id: number) {
-    return axios.get<user>(`http://localhost:3000/user/id/${id}`);
-    // .then((res) => {
-    //   console.log(res.data);
+  // function getMyId(username: string) {
+  //   axios
+  //     .get<user>(`http://localhost:3000/user/${username.trim()}`)
+  //     .then((res) => {
+  //       setNewMessage((newMessage) => ({
+  //         ...newMessage,
+  //         ...{ senderId: res.data.id },
+  //       }));
+  //     });
+  // }
+  // function getUsername(id: number) {
+  //   return axios.get<user>(`http://localhost:3000/user/id/${id}`);
+  //   // .then((res) => {
+  //   //   console.log(res.data);
 
-    //   return res.data;
-    // });
-  }
+  //   //   return res.data;
+  //   // });
+  // }
   //example of refetching
   const {
     data: recipID,
@@ -154,109 +161,104 @@ export default function Messages() {
     }
   }
   // if (!isLoading && data) return data.data.id;
+  if (newMessage.senderId != payload?.id && !!payload.id) {
+    setNewMessage((newMessage) => ({
+      ...newMessage,
+      ...{ senderId: payload?.id },
+    }));
+  }
 
   return (
     <>
       <Navbar />
-      <jwtContext.Consumer>
-        {(jwt) => {
-          if (jwt != null) {
-            newMessage.senderId == -1 && getMyId(jwt?.username);
-          }
-          return (
-            <div className="page-wrapper">
-              <h1>messages</h1>
-              <div className="msg-tab-container">
-                <div
-                  className={
-                    "clickable msg-tab" +
-                    (activeTab == 0 ? " msg-tab-active" : "")
-                  }
-                  onClick={() => setActiveTab(0)}
-                >
-                  Inbox
-                </div>
-                <div
-                  className={
-                    "clickable msg-tab" +
-                    (activeTab == 1 ? " msg-tab-active" : "")
-                  }
-                  onClick={() => setActiveTab(1)}
-                >
-                  Outbox
-                </div>
-                <div
-                  className={
-                    "clickable msg-tab" +
-                    (activeTab == 2 ? " msg-tab-active" : "")
-                  }
-                  onClick={() => setActiveTab(2)}
-                >
-                  Send New Message
-                </div>
-              </div>
-              <div className="message-container">
-                {activeTab == 0 &&
-                  (myMessages?.length != 0 ? (
-                    myMessages?.map((msg: IExtendedMessageDTO) => (
-                      <Message msg={msg} sent={false} />
-                    ))
-                  ) : (
-                    <p>no messages</p>
-                  ))}
-                {activeTab == 1 &&
-                  (mySentMessages?.length != 0 ? (
-                    mySentMessages?.map((msg: IExtendedMessageDTO) => (
-                      <Message msg={msg} sent />
-                    ))
-                  ) : (
-                    <p>no messages</p>
-                  ))}
-                {activeTab == 2 && (
-                  <div className="msg-send-new">
-                    <div>recipient</div>
-                    <input
-                      className={"" + (isBadRecipient ? " bad-recipient" : "")}
-                      onChange={(e) => setRecipientName(e.target.value)}
-                      onBlur={(e) => {
-                        // getRecipientId(e.target.value)
-                        e.target.value.length > 1 &&
-                          setRecipientIDGetter(!recipientIDGetter);
-                      }}
-                    ></input>
-                    <div>subject</div>
-                    <input
-                      onChange={(e) =>
-                        setNewMessage((newMessage) => ({
-                          ...newMessage,
-                          ...{ subject: e.target.value },
-                        }))
-                      }
-                    ></input>
-                    <div>body</div>
-                    <textarea
-                      rows={20}
-                      onChange={(e) =>
-                        setNewMessage((newMessage) => ({
-                          ...newMessage,
-                          ...{ body: e.target.value },
-                        }))
-                      }
-                    ></textarea>
-                    <button
-                      onClick={(e) => {
-                        sendMessage();
-                      }}
-                    >
-                      Send
-                    </button>
-                  </div>
-                )}
-              </div>
+
+      <div className="page-wrapper">
+        <h1>messages</h1>
+        <div className="msg-tab-container">
+          <div
+            className={
+              "clickable msg-tab" + (activeTab == 0 ? " msg-tab-active" : "")
+            }
+            onClick={() => setActiveTab(0)}
+          >
+            Inbox
+          </div>
+          <div
+            className={
+              "clickable msg-tab" + (activeTab == 1 ? " msg-tab-active" : "")
+            }
+            onClick={() => setActiveTab(1)}
+          >
+            Outbox
+          </div>
+          <div
+            className={
+              "clickable msg-tab" + (activeTab == 2 ? " msg-tab-active" : "")
+            }
+            onClick={() => setActiveTab(2)}
+          >
+            Send New Message
+          </div>
+        </div>
+        <div className="message-container">
+          {activeTab == 0 &&
+            (myMessages?.length != 0 ? (
+              myMessages?.map((msg: IExtendedMessageDTO) => (
+                <Message msg={msg} sent={false} />
+              ))
+            ) : (
+              <p>no messages</p>
+            ))}
+          {activeTab == 1 &&
+            (mySentMessages?.length != 0 ? (
+              mySentMessages?.map((msg: IExtendedMessageDTO) => (
+                <Message msg={msg} sent />
+              ))
+            ) : (
+              <p>no messages</p>
+            ))}
+          {activeTab == 2 && (
+            <div className="msg-send-new">
+              <div>recipient</div>
+              <input
+                className={"" + (isBadRecipient ? " bad-recipient" : "")}
+                onChange={(e) => setRecipientName(e.target.value)}
+                onBlur={(e) => {
+                  // getRecipientId(e.target.value)
+                  e.target.value.length > 1 &&
+                    setRecipientIDGetter(!recipientIDGetter);
+                }}
+              ></input>
+              <div>subject</div>
+              <input
+                onChange={(e) =>
+                  setNewMessage((newMessage) => ({
+                    ...newMessage,
+                    ...{ subject: e.target.value },
+                  }))
+                }
+              ></input>
+              <div>body</div>
+              <textarea
+                rows={20}
+                onChange={(e) =>
+                  setNewMessage((newMessage) => ({
+                    ...newMessage,
+                    ...{ body: e.target.value },
+                  }))
+                }
+              ></textarea>
+              <button
+                onClick={(e) => {
+                  sendMessage();
+                }}
+              >
+                Send
+              </button>
             </div>
-          );
-        }}
-      </jwtContext.Consumer>
+          )}
+        </div>
+      </div>
     </>
   );
 }

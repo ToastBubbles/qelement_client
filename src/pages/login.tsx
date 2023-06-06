@@ -1,17 +1,16 @@
-import RatingCard from "@/components/RatingCard";
-import Comment from "@/components/Comment";
-import AllColorStatus from "@/components/AllColorStatus";
 import Navbar from "@/components/Navbar";
-import { useState } from "react";
-import axios from "axios";
+import { useContext, useState } from "react";
 import { ILoginDTO } from "@/interfaces/general";
-import Cookies from "js-cookie";
 import Footer from "@/components/Foorter";
 import { login } from "@/auth/auth";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { AppContext } from "@/context/context";
+import { Types } from "@/context/jwt/reducer";
 
 export default function Login() {
+  const { state, dispatch } = useContext(AppContext);
+
   const [loginDTO, setLoginDTO] = useState<ILoginDTO>({
     username: "",
     password: "",
@@ -21,7 +20,11 @@ export default function Login() {
 
   const attemptLogin = (creds: ILoginDTO) => {
     login(creds).then((res) => {
-      console.log(res);
+      console.log("Here I am", res);
+      dispatch({
+        type: Types.SetJwt,
+        payload: res,
+      });
 
       if (res) {
         router.push("/profile");

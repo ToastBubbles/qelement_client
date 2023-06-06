@@ -7,7 +7,7 @@ function LoginBtn() {
   return (
     <>
       <Link href="/login">
-        <button>Login</button>
+        <button className="login-btn clickable">Login</button>
       </Link>
     </>
   );
